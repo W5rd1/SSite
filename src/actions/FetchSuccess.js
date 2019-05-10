@@ -1,9 +1,9 @@
-function FetchSuccess(stream) {
-  const FETCH_SUCCESS = "FETCH_Success";
+function FetchSuccess(streams) {
+  const FETCH_SUCCESS = "FETCH_SUCCESS";
   return {
     type: FETCH_SUCCESS,
     status: "success",
-    stream
+    streams
   };
 }
 

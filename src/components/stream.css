@@ -1,6 +1,7 @@
 .page {
   display: flex;
   justify-content: space-between;
+  width: 100vw;
 }
 .chat {
   width: 25vw;
@@ -31,6 +32,10 @@
   width: 90%;
   overflow: auto;
 }
+#test {
+  height: 600px;
+  width: 600px;
+}
 .stream {
   width: 100%;
   height: 80vh;
@@ -54,8 +59,10 @@
   display: none;
 }
 .logo {
-  position: absolute;
-  top: 0;
+  position: relative;
   height: 150px;
   width: 250px;
+}
+.box {
+  width: auto;
 }
