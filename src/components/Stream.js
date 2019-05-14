@@ -16,7 +16,7 @@ import FetchFailure from "../actions/FetchFailure";
 import TwitchApp from "../reducers/TwitchApp";
 class Stream extends React.Component {
   state = {
-    streamer: "danucd"
+    streamer: "deadlyfoxsin"
   };
   componentDidMount() {
     this.props.store.subscribe(this.forceUpdate.bind(this));

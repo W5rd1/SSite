@@ -84,7 +84,8 @@
 .panel-container {
   display: grid;
   height: 50vh;
-  width: 100%;
+  width: 95%;
+  margin-top: 50px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr;
 }
