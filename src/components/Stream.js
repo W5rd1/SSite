@@ -84,13 +84,16 @@ class Stream extends React.Component {
               <div />
             )}
           </div>
-          <div className="panel-container">
-            <div className="panel">A</div>
-            <div className="panel">B</div>
-            <div className="panel">C</div>
-            <div className="panel">D</div>
-            <div className="panel">E</div>
-            <div className="panel">F</div>
+          <div className="panel-container-container">
+            <div className="youtube-panel">Youtube </div>
+            <div className="panel-container-rest">
+              <div className="panel">C</div>
+              <div className="panel">D</div>
+              <div className="panel">E</div>
+              <div className="panel">F</div>
+              <div className="panel">F</div>
+              <div className="panel">F</div>
+            </div>
           </div>
         </div>
         <div className="chat">
