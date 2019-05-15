@@ -5,6 +5,7 @@ import axios from "axios";
 import Iframe from "react-iframe";
 import ReactPlayer from "react-player";
 import NavBar from "./Navbar";
+import youtube from "../api/Youtube";
 
 import "./stream.css";
 
@@ -16,14 +17,25 @@ import FetchFailure from "../actions/FetchFailure";
 import TwitchApp from "../reducers/TwitchApp";
 class Stream extends React.Component {
   state = {
-    streamer: "deadlyfoxsin"
+    streamer: "tsm_bjergsen",
+    youtube: "bjergsen",
+    youtubeVideos: []
   };
   componentDidMount() {
     this.props.store.subscribe(this.forceUpdate.bind(this));
     this.apiRequest();
     this.dispatchFetchRequest();
+    this.youtubeFetch();
   }
-
+  youtubeFetch = async channel => {
+    const response = await youtube.get("/search", {
+      params: {
+        q: this.state.youtube
+      }
+    });
+    this.setState({ videos: response.data.items });
+    console.log(this.state.videos);
+  };
   apiRequest() {
     axios
       .get(
