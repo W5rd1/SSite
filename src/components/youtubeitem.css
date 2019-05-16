@@ -1,4 +1,11 @@
-.item {
+.item-container {
   display: flex;
+  align-items: center;
   height: 20%;
+  margin-left: 5px;
+}
+.content-container {
+  width: 100%;
+  text-align: start;
+  margin-left: 5px;
 }

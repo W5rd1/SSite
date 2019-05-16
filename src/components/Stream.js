@@ -18,7 +18,7 @@ import FetchFailure from "../actions/FetchFailure";
 import TwitchApp from "../reducers/TwitchApp";
 class Stream extends React.Component {
   state = {
-    streamer: "tsm_bjergsen",
+    streamer: "deadlyfoxsin",
     youtube: "bjergsen",
     youtubeVideos: []
   };
@@ -100,6 +100,7 @@ class Stream extends React.Component {
           </div>
           <div className="panel-container-container">
             <div className="youtube-panel">
+              <div className="youtube-head">My videos</div>
               <VideoList videos={this.state.youtubeVideos} />{" "}
             </div>
             <div className="panel-container-rest">
