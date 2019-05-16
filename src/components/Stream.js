@@ -6,6 +6,7 @@ import Iframe from "react-iframe";
 import ReactPlayer from "react-player";
 import NavBar from "./Navbar";
 import youtube from "../api/Youtube";
+import VideoList from "./YoutubeList";
 
 import "./stream.css";
 
@@ -30,11 +31,12 @@ class Stream extends React.Component {
   youtubeFetch = async channel => {
     const response = await youtube.get("/search", {
       params: {
-        q: this.state.youtube
+        q: this.state.youtube,
+        type: "video"
       }
     });
-    this.setState({ videos: response.data.items });
-    console.log(this.state.videos);
+    this.setState({ youtubeVideos: response.data.items });
+    console.log(this.state.youtubeVideos);
   };
   apiRequest() {
     axios
@@ -97,7 +99,9 @@ class Stream extends React.Component {
             )}
           </div>
           <div className="panel-container-container">
-            <div className="youtube-panel">Youtube </div>
+            <div className="youtube-panel">
+              <VideoList videos={this.state.youtubeVideos} />{" "}
+            </div>
             <div className="panel-container-rest">
               <div className="panel">C</div>
               <div className="panel">D</div>
