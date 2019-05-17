@@ -18,6 +18,7 @@ import FetchFailure from "../actions/FetchFailure";
 import TwitchApp from "../reducers/TwitchApp";
 class Stream extends React.Component {
   state = {
+    displayname: "",
     streamer: "deadlyfoxsin",
     youtube: "bjergsen",
     youtubeVideos: []
@@ -40,17 +41,16 @@ class Stream extends React.Component {
   };
   apiRequest() {
     axios
-      .get(
-        "https://api.twitch.tv/helix/streams?user_login=" + this.state.streamer,
-        {
-          headers: {
-            "Client-ID": "ffid0hjsu47c8dw5of4ejkt3grgrzy"
-          }
+      .get("https://api.twitch.tv/helix/users?login=" + this.state.streamer, {
+        headers: {
+          "Client-ID": "ffid0hjsu47c8dw5of4ejkt3grgrzy"
         }
-      )
+      })
       .then(response => {
-        const stream = "A";
-        this.dispatchFetchSuccess(stream);
+        console.log(response);
+        console.log("bleh");
+        this.setState({ displayname: response.data.data[0].display_name });
+        // this.dispatchFetchSuccess(stream);
       })
       .catch(e => {
         this.dispatchFetchFailure(e);
@@ -80,7 +80,7 @@ class Stream extends React.Component {
       // <div clasName="pagewithnav">
       <div className="page">
         <div className="left-side">
-          <NavBar streamer={this.state.streamer} />
+          <NavBar streamer={this.state.displayname} />
 
           <div className="stream">
             {status === "loading" ? (
