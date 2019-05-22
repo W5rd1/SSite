@@ -7,6 +7,7 @@ import ReactPlayer from "react-player";
 import NavBar from "./Navbar";
 import youtube from "../api/Youtube";
 import VideoList from "./YoutubeList";
+import { getSDK } from "../Functions/Sdk";
 
 import "./stream.css";
 
@@ -16,18 +17,21 @@ import FetchRequest from "../actions/FetchRequest";
 import FetchSuccess from "../actions/FetchSuccess";
 import FetchFailure from "../actions/FetchFailure";
 import TwitchApp from "../reducers/TwitchApp";
+
 class Stream extends React.Component {
   state = {
     displayname: "",
-    streamer: "deadlyfoxsin",
+    streamer: "danucd",
     youtube: "bjergsen",
-    youtubeVideos: []
+    youtubeVideos: [],
+    channelId: ""
   };
   componentDidMount() {
     this.props.store.subscribe(this.forceUpdate.bind(this));
     this.apiRequest();
     this.dispatchFetchRequest();
     this.youtubeFetch();
+    window.streamer = this.state.streamer;
   }
   youtubeFetch = async channel => {
     const response = await youtube.get("/search", {
@@ -47,13 +51,36 @@ class Stream extends React.Component {
         }
       })
       .then(response => {
+        let streamerobject = response.data.data[0];
         console.log(response);
-        console.log("bleh");
-        this.setState({ displayname: response.data.data[0].display_name });
+        this.setState({
+          displayname: streamerobject.display_name,
+          channelId: streamerobject.id
+        });
         // this.dispatchFetchSuccess(stream);
       })
       .catch(e => {
         this.dispatchFetchFailure(e);
+      });
+  }
+  twitchFollowRequest() {
+    axios.put("https://api.twitch.tv/kraken/users/44322889/follows/channels/");
+  }
+  twitchTokenGet() {
+    axios
+      .get("https://id.twitch.tv/oauth2/authorize", {
+        "Access-Control-Allow-Headers": {
+          client_id: "ffid0hjsu47c8dw5of4ejkt3grgrzy",
+          redirect_uri: "localhost:3000",
+          response_type: "token",
+          scope: "channel:read:subscriptions"
+        }
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(e => {
+        console.log(e);
       });
   }
   dispatchFetchRequest() {
@@ -87,13 +114,7 @@ class Stream extends React.Component {
               <Loader />
             ) : status === "success" ? (
               // streamCardItems
-              <div id="focused-item">
-                <ReactPlayer
-                  url={"https://www.twitch.tv/" + this.state.streamer}
-                  width="100%"
-                  height="100%"
-                />
-              </div>
+              <div id="focused-item" />
             ) : (
               <div />
             )}
@@ -101,7 +122,7 @@ class Stream extends React.Component {
           <div className="panel-container-container">
             <div className="youtube-panel">
               <div className="youtube-head">My videos</div>
-              <VideoList videos={this.state.youtubeVideos} />{" "}
+              <VideoList videos={this.state.youtubeVideos} />
             </div>
             <div className="panel-container-rest">
               <div className="panel">C</div>
@@ -124,6 +145,7 @@ class Stream extends React.Component {
             width="100%"
             height="100%"
             frameBorder="0"
+            onClick={this.twitchTokenGet}
           />
         </div>
       </div>
