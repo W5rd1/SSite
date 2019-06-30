@@ -13,6 +13,8 @@ export function getSDK(
   return new Promise((resolve, reject) => {
     // If we are already loading the SDK, add the resolve
     // function to the existing array of resolve functions
+    const resolves = {};
+
     if (resolves[url]) {
       resolves[url].push(resolve);
       return;
