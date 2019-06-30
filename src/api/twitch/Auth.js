@@ -1,9 +1,9 @@
-const ClientID = "ffid0hjsu47c8dw5of4ejkt3grgrzy";
+const ClientID = "2ehfhpp0kr5f5g7k7czrirov9ewcjb";
 const ResponseType = "token+id_token";
 const Scope = ["user_follows_edit", "openid"];
 const RedirectUri = "localhost:3000";
 
-let Scopes = Scope.join("%20");
+let Scopes = Scope.join("+");
 let URL =
   "https://id.twitch.tv/oauth2/authorize?client_id=" +
   ClientID +
