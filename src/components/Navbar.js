@@ -1,5 +1,6 @@
 import React from "react";
 import "./navbar.css";
+import URL from "../api/twitch/Auth";
 class NavBar extends React.Component {
   render() {
     return (
@@ -16,6 +17,9 @@ class NavBar extends React.Component {
               <div className="highlight">Follow</div>
               <div>Subscribe</div>
               <div>Tip</div>
+              <div>
+                <a href={URL}>Auth</a>
+              </div>
             </div>
           </div>
         </div>

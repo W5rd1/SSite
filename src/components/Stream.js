@@ -7,6 +7,7 @@ import ReactPlayer from "react-player";
 import NavBar from "./Navbar";
 import youtube from "../api/Youtube";
 import VideoList from "./YoutubeList";
+import TwitchAuth from "../api/twitch/Auth";
 
 import "./stream.css";
 
@@ -19,7 +20,7 @@ import TwitchApp from "../reducers/TwitchApp";
 class Stream extends React.Component {
   state = {
     displayname: "",
-    streamer: "deadlyfoxsin",
+    streamer: "nick28t",
     youtube: "bjergsen",
     youtubeVideos: []
   };
